@@ -5,8 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="adbe6abf-e6da-44b1-a25a-79e7b7d6dd21" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/FileInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client-sep-2021/src/main/resources/CloudStorage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/ListRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/ListResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/PathInRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/PathResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/PathUpRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server-sep-2021/root/ksdu.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/ServerUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client-sep-2021/src/main/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/client-sep-2021/src/main/java/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sep-2021/root/1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sep-2021/src/main/java/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sep-2021/src/main/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-sep-2021/src/main/resources/chat.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/CommandType.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/CommandType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/Command.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/Command.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/CommandType.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/CommandType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/FileMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/FileMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-sep-2021/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server-sep-2021/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/FileMessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/FileMessageHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/NettyEchoServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/NettyEchoServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,13 +42,26 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1yEOwWJOBtzkhfhlPI7GomsQYVt" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -36,23 +70,29 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/client-sep-2021/src/main/resources" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.152439" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.geekbrains" />
       <recent name="com.geekbrains.netty" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\java\cloud-storage-sep-2021\client-sep-2021\src\main\resources" />
       <recent name="$PROJECT_DIR$/client-sep-2021/src/main/resources" />
       <recent name="$PROJECT_DIR$/server-sep-2021/src/main/resources" />
     </key>
@@ -76,7 +116,7 @@
       </method>
     </configuration>
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="App" />
+      <option name="MAIN_CLASS_NAME" value="com.geekbrains.App" />
       <module name="client-sep-2021" />
       <method v="2">
         <option name="Make" enabled="true" />

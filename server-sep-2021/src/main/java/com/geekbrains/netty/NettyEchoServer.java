@@ -1,6 +1,6 @@
 package com.geekbrains.netty;
 
-import java.util.logging.FileHandler;
+
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -16,8 +16,7 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import lombok.extern.slf4j.Slf4j;
 
-// send string
-// receive string
+
 @Slf4j
 public class NettyEchoServer {
 
@@ -41,7 +40,7 @@ public class NettyEchoServer {
                             );
                         }
                     })
-                    .bind(1111)
+                    .bind(8189)
                     .sync();
             log.debug("Server started...");
             channelFuture.channel().closeFuture().sync(); // block

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<?import javafx.geometry.Insets?>
+
+<VBox prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.geekbrains.Controller">
+            <MenuBar focusTraversable="false" maxWidth="Infinity" >
+            <Menu text="File">
+                <MenuItem onAction="#buttonExitAction" text="Выйти из программы" />
+            </Menu>
+            <padding>
+                <Insets left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </MenuBar>
+        <HBox maxWidth="Infinity" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+
+            <VBox maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                <HBox>
+                    <ComboBox fx:id="disksBoxClient"/>
+                    <TextField fx:id="clientPath" editable="false" HBox.hgrow="ALWAYS" />
+                    <Button text="Вверх" onAction="#clientPathUp" />
+                </HBox>
+                <ListView fx:id="clientFilesTableView" maxWidth="Infinity" VBox.vgrow="ALWAYS" />
+                <padding>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </padding>
+            </VBox>
+
+            <VBox maxWidth="Infinity" VBox.vgrow="ALWAYS">
+                <Button maxWidth="Infinity" focusTraversable="false" text="Копировать к себе &gt;&gt;" onAction="#upload">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin></Button>
+                <Button maxWidth="Infinity" focusTraversable="false" text="&lt;&lt;Копировать в облако " onAction="#download">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin></Button>
+                <Button maxWidth="Infinity" focusTraversable="false" text="Удалить">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin></Button>
+                <Button maxWidth="Infinity" focusTraversable="false" text="Создать директорию">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin></Button>
+                <Button maxWidth="Infinity" focusTraversable="false" text="Создать файл">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin></Button>
+                <padding>
+                    <Insets bottom="5.0" top="70.0" />
+                </padding>
+            </VBox>
+
+            <VBox maxWidth="Infinity" prefWidth="256.0" HBox.hgrow="ALWAYS">
+                <HBox>
+                    <TextField  fx:id="serverPath" editable="false" HBox.hgrow="ALWAYS" />
+                    <Button text="Вверх" onAction="#serverPathUp"/>
+                </HBox>
+                <ListView fx:id="serverFilesTableView" maxWidth="Infinity" VBox.vgrow="ALWAYS" />
+                <padding>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </padding>
+            </VBox>
+
+        </HBox>
+        <TextField fx:id="clientPath1"  layoutX="14.0" layoutY="439.0" prefHeight="37.0" prefWidth="301.0"/>
+
+</VBox>
