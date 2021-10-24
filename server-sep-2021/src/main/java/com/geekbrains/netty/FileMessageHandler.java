@@ -1,5 +1,6 @@
 package com.geekbrains.netty;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -7,6 +8,7 @@ import com.geekbrains.*;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.codehaus.plexus.util.FileUtils;
 
 @Slf4j
 
@@ -15,7 +17,7 @@ public class FileMessageHandler extends SimpleChannelInboundHandler<Command> {
 
     private static Path currentPath;
     private static Path clientPath;
-    DBAuthService service = new DBAuthService();
+    //DBAuthService service = new DBAuthService();
 
 
 
@@ -39,10 +41,7 @@ public class FileMessageHandler extends SimpleChannelInboundHandler<Command> {
         switch (cmd.getType()) {
             case FILE_MESSAGE:
                 FileMessage fileMessage = (FileMessage) cmd;
-                Files.write(
-                        currentPath.resolve(fileMessage.getName()),
-                        fileMessage.getBytes()
-                );
+                FileUtils.copyFile(fileMessage.getFile(), new File(fileMessage.getName()));
                 ctx.writeAndFlush(new ListResponse(currentPath));
                 log.debug("Received a file {} from the client", fileMessage.getName());
                 break;
@@ -51,7 +50,7 @@ public class FileMessageHandler extends SimpleChannelInboundHandler<Command> {
                 FileRequest fileRequest = (FileRequest) cmd;
                 String fileName = fileRequest.getName();
                 Path file = Paths.get(String.valueOf(currentPath), fileName);
-                ctx.writeAndFlush(new FileMessage(file));
+                //ctx.writeAndFlush(new FileMessage(file));
                 log.debug("Send file {} to the client", fileName);
                 break;
 
@@ -93,7 +92,7 @@ public class FileMessageHandler extends SimpleChannelInboundHandler<Command> {
                 String password = authRequest.getPassword();
                 AuthResponse authResponse = new AuthResponse();
                 try {
-                    if (service.findByLogin(login).equals(password)) {
+                    if (true) {
                         authResponse.setAuthStatus(true);
                         clientPath = Paths.get(".", login).normalize();
                         if (!Files.exists(clientPath)) { // если нет такой папки

@@ -4,47 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="adbe6abf-e6da-44b1-a25a-79e7b7d6dd21" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/Callback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/ClientStringHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/Net.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/AuthRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/AuthResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/Delete.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-sep-2021/root/12.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/CrudService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/DBAuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/DataBasesHandler.java" afterDir="false" />
+    <list default="true" id="adbe6abf-e6da-44b1-a25a-79e7b7d6dd21" name="Default Changelist" comment="Lesson 2. Nio">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client-sep-2021/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client-sep-2021/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client-sep-2021/root/target.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/FileInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client-sep-2021/src/main/resources/CloudStorage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client-sep-2021/src/main/resources/CloudStorage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/CommandType.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/CommandType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-storage-sep-2021.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/ListResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/ListResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/PathInRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/PathInRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/Command.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/Command.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/CommandType.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/CommandType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/FileMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/FileMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/FileRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/FileRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/ListResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/ListResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/PathInRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/PathInRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server-sep-2021/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/root/1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/root/ksdu.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/EchoHandler.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/FileMessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/FileMessageHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/Intro.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/NettyEchoServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/NettyServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/ServerUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/StringInboundHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/StringOutboundHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/NettyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/NettyServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,8 +27,8 @@
       <list>
         <option value="FxmlFile" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -153,8 +121,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NettyServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.geekbrains.netty.NettyServer" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.geekbrains.netty.Main" />
       <module name="server-sep-2021" />
       <extension name="coverage">
         <pattern>
@@ -166,12 +134,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NioUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.geekbrains.nio.NioUtils" />
+    <configuration name="NettyServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.geekbrains.netty.NettyServer" />
       <module name="server-sep-2021" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.geekbrains.nio.*" />
+          <option name="PATTERN" value="com.geekbrains.netty.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -195,10 +163,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.NettyServer" />
         <item itemvalue="Application.DataBasesHandler" />
         <item itemvalue="Application.Server (1)" />
-        <item itemvalue="Application.NioUtils" />
       </list>
     </recent_temporary>
   </component>
@@ -217,6 +185,7 @@
       <workItem from="1631818252515" duration="629000" />
       <workItem from="1632157584209" duration="7623000" />
       <workItem from="1632416830953" duration="6441000" />
+      <workItem from="1635078650497" duration="2721000" />
     </task>
     <task id="LOCAL-00001" summary="Lesson 2. Nio">
       <created>1632164431188</created>
@@ -231,8 +200,35 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Lesson 2. Nio" />
     <option name="LAST_COMMIT_MESSAGE" value="Lesson 2. Nio" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/FileMessageHandler.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.geekbrains.FileMessage" memberName="type" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

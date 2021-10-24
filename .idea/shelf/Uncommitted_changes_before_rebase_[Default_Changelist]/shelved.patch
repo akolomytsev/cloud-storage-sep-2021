@@ -1,0 +1,35 @@
+Index: server-sep-2021/src/main/java/com/geekbrains/netty/NettyEchoServer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.geekbrains.netty;\r\n\r\nimport java.util.logging.FileHandler;\r\n\r\nimport io.netty.bootstrap.ServerBootstrap;\r\nimport io.netty.channel.ChannelFuture;\r\nimport io.netty.channel.ChannelInitializer;\r\nimport io.netty.channel.EventLoopGroup;\r\nimport io.netty.channel.nio.NioEventLoopGroup;\r\nimport io.netty.channel.socket.SocketChannel;\r\nimport io.netty.channel.socket.nio.NioServerSocketChannel;\r\nimport io.netty.handler.codec.serialization.ClassResolvers;\r\nimport io.netty.handler.codec.serialization.ObjectDecoder;\r\nimport io.netty.handler.codec.serialization.ObjectEncoder;\r\nimport io.netty.handler.codec.string.StringDecoder;\r\nimport io.netty.handler.codec.string.StringEncoder;\r\nimport lombok.extern.slf4j.Slf4j;\r\n\r\n// send string\r\n// receive string\r\n@Slf4j\r\npublic class NettyEchoServer {\r\n\r\n    public NettyEchoServer() {\r\n\r\n        EventLoopGroup auth = new NioEventLoopGroup(1);\r\n        EventLoopGroup worker = new NioEventLoopGroup();\r\n\r\n        try {\r\n            ServerBootstrap bootstrap = new ServerBootstrap();\r\n\r\n            ChannelFuture channelFuture = bootstrap.group(auth, worker)\r\n                    .channel(NioServerSocketChannel.class)\r\n                    .childHandler(new ChannelInitializer<SocketChannel>() {\r\n                        @Override\r\n                        protected void initChannel(SocketChannel channel) throws Exception {\r\n                            channel.pipeline().addLast(\r\n                                    new ObjectEncoder(),\r\n                                    new ObjectDecoder(ClassResolvers.cacheDisabled(null)),\r\n                                    new FileMessageHandler()\r\n                            );\r\n                        }\r\n                    })\r\n                    .bind(1111)\r\n                    .sync();\r\n            log.debug(\"Server started...\");\r\n            channelFuture.channel().closeFuture().sync(); // block\r\n        }catch (Exception e) {\r\n            log.error(\"Server exception: Stacktrace: \", e);\r\n        } finally {\r\n            auth.shutdownGracefully();\r\n            worker.shutdownGracefully();\r\n        }\r\n    }\r\n\r\n    public static void main(String[] args) {\r\n        new NettyEchoServer();\r\n    }\r\n\r\n}\r\n
+===================================================================
+diff --git a/server-sep-2021/src/main/java/com/geekbrains/netty/NettyEchoServer.java b/server-sep-2021/src/main/java/com/geekbrains/netty/NettyEchoServer.java
+--- a/server-sep-2021/src/main/java/com/geekbrains/netty/NettyEchoServer.java	
++++ b/server-sep-2021/src/main/java/com/geekbrains/netty/NettyEchoServer.java	
+@@ -52,9 +52,4 @@
+             worker.shutdownGracefully();
+         }
+     }
+-
+-    public static void main(String[] args) {
+-        new NettyEchoServer();
+-    }
+-
+ }
+Index: server-sep-2021/src/main/java/com/geekbrains/netty/Intro.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.geekbrains.netty;\r\n\r\npublic class Intro {\r\n    public static void main(String[] args) {\r\n        // System.arraycopy();\r\n        // new FileInputStream().read()\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/server-sep-2021/src/main/java/com/geekbrains/netty/Intro.java b/server-sep-2021/src/main/java/com/geekbrains/netty/Intro.java
+--- a/server-sep-2021/src/main/java/com/geekbrains/netty/Intro.java	
++++ b/server-sep-2021/src/main/java/com/geekbrains/netty/Intro.java	
+@@ -2,7 +2,6 @@
+ 
+ public class Intro {
+     public static void main(String[] args) {
+-        // System.arraycopy();
+-        // new FileInputStream().read()
++        new NettyEchoServer();
+     }
+ }

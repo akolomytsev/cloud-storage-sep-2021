@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -37,6 +38,18 @@ public class Controller implements Initializable {
 
     private Net net;
 
+    private void addViewListener(ListView<String> lv, TextField ta) {
+        lv.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> {
+                    try {
+                        ta.clear();
+                        ta.appendText(lv.getSelectionModel().getSelectedItem());
+                    } catch (NullPointerException ignored) {
+                    }
+                });
+    }
+
     public void sendLoginAndPassword(ActionEvent actionEvent) {
         String login = loginField.getText();
         String password = passwordField.getText();
@@ -46,10 +59,10 @@ public class Controller implements Initializable {
     }
 
     public void sendFile(ActionEvent actionEvent) throws IOException {
-        String fileName = input.getText();
+        String fileName = input.getText().split(" ")[1];
         input.clear();
         Path file = currentDir.resolve(fileName);
-        net.sendCommand(new FileMessage(file));
+        net.sendCommand(new FileMessage(file.toFile()));
     }
 
     public void receiveArrayFiles(ActionEvent actionEvent) {
@@ -82,6 +95,7 @@ public class Controller implements Initializable {
     @SneakyThrows
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        addViewListener(fileClientView, input);
         disksBoxClient.getItems().clear(); //  очищаем вкладку disksBox при старте
         for (Path p : FileSystems.getDefault().getRootDirectories()) { // заполняем через стандартный метод
             // FileSystems который предоставляет инф-у о файловой системе мы берем систему по умолчанию (Default) и запрашиваем список корневых директорий
@@ -109,10 +123,10 @@ public class Controller implements Initializable {
                     break;
                 case FILE_MESSAGE:
                     FileMessage fileMessage = (FileMessage) cmd;
-                    Files.write(
-                            currentDir.resolve(fileMessage.getName()),
-                            fileMessage.getBytes()
-                    );
+//                    Files.write(
+//                            //currentDir.resolve(fileMessage.getName()),
+//                            //fileMessage.getBytes()
+//                    );
                     Platform.runLater(() -> {
                         try {
                             refreshClientView();
