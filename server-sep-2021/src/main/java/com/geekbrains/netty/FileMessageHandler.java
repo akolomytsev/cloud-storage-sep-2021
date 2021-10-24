@@ -1,5 +1,6 @@
 package com.geekbrains.netty;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -7,6 +8,7 @@ import com.geekbrains.*;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.codehaus.plexus.util.FileUtils;
 
 @Slf4j
 
@@ -40,11 +42,12 @@ public class FileMessageHandler extends SimpleChannelInboundHandler<Command> {
             case FILE_MESSAGE:
                 FileMessage fileMessage = (FileMessage) cmd;
                 Files.write(
-                        currentPath.resolve(fileMessage.getName()),
-                        fileMessage.getBytes()
+                        currentPath.resolve(fileMessage.getName()), fileMessage.getBytes()
+                        //currentPath.resolve(fileMessage.)
                 );
+                //FileUtils.copyFile(fileMessage.getFile(), new File(fileMessage.getName()));
                 ctx.writeAndFlush(new ListResponse(currentPath));
-                log.debug("Received a file {} from the client", fileMessage.getName());
+                //log.debug("Received a file {} from the client", fileMessage.getName());
                 break;
 
             case FILE_REQUEST:
@@ -52,6 +55,7 @@ public class FileMessageHandler extends SimpleChannelInboundHandler<Command> {
                 String fileName = fileRequest.getName();
                 Path file = Paths.get(String.valueOf(currentPath), fileName);
                 ctx.writeAndFlush(new FileMessage(file));
+                //ctx.writeAndFlush(new FileMessage(file.toFile()));
                 log.debug("Send file {} to the client", fileName);
                 break;
 
@@ -63,7 +67,7 @@ public class FileMessageHandler extends SimpleChannelInboundHandler<Command> {
 
             case PATH_UP_REQUEST:
                 if (currentPath.getParent() != null) {
-                    if (currentPath.equals(clientPath)) {
+                    if (clientPath.equals(currentPath)) {
                         log.debug("Above the client's folder , it is not necessary to rise");
                     } else {
                         currentPath = currentPath.getParent();
@@ -90,10 +94,11 @@ public class FileMessageHandler extends SimpleChannelInboundHandler<Command> {
             case AUTH_REQUEST:
                 AuthRequest authRequest = (AuthRequest) cmd;
                 String login = authRequest.getLogin();
-                String password = authRequest.getPassword();
+     //           String password = authRequest.getPassword();
                 AuthResponse authResponse = new AuthResponse();
                 try {
-                    if (service.findByLogin(login).equals(password)) {
+                   // if (service.findByLogin(login).equals(password)) {
+                    if (true){
                         authResponse.setAuthStatus(true);
                         clientPath = Paths.get(".", login).normalize();
                         if (!Files.exists(clientPath)) { // если нет такой папки
@@ -107,16 +112,18 @@ public class FileMessageHandler extends SimpleChannelInboundHandler<Command> {
                 }
                 ctx.writeAndFlush(authResponse);
                 break;
+                case DELETE:
+                Delete delete = (Delete) cmd;
+                File file1 = new File(String.valueOf(currentPath.resolve(delete.getName())));
+                Delete.deleteFile(file1);
+                ctx.writeAndFlush(new ListResponse(currentPath)); // шлем обновление списка файлов на сервере
+                break;
+
             default:
                 log.debug("Invalid command {}", cmd.getType());
                 break;
 
-//            case DELETE:
-//                Delete delete = (Delete) cmd;
-//                File file = new File(String.valueOf(currentPath.resolve(delete.getName())));
-//                Delete.deleteFile(file);
-//                ctx.writeAndFlush(new ListResponse(currentPath)); // шлем обновление списка файлов на сервере
-//                break;
+
         }
     }
 

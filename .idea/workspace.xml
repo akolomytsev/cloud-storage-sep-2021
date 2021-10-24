@@ -5,46 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="adbe6abf-e6da-44b1-a25a-79e7b7d6dd21" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/Callback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/ClientStringHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/Net.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/AuthRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/AuthResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/Delete.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-sep-2021/root/12.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/CrudService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/DBAuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/DataBasesHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kora/О себе.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client-sep-2021/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client-sep-2021/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client-sep-2021/root/target.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client-sep-2021/src/main/java/com/geekbrains/FileInfo.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client-sep-2021/src/main/resources/CloudStorage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client-sep-2021/src/main/resources/CloudStorage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/CommandType.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/CommandType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/FileRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/ListResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/ListResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/PathInRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/src/main/java/com/geekbrains/PathInRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/Command.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/Command.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/CommandType.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/CommandType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/FileMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/FileMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/FileRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/FileRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/ListResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/ListResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/PathInRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/core-sep-2021/target/classes/com/geekbrains/PathInRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server-sep-2021/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/root/1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/root/ksdu.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/EchoHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kora/A218649078AE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kora/Прочитано/Shildt_G_-_Java_8_Rukovodstvo_dlya_nachinayuschikh_-_2015.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/FileMessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/FileMessageHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/Intro.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/NettyEchoServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/NettyServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/ServerUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/StringInboundHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/StringOutboundHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/NettyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server-sep-2021/src/main/java/com/geekbrains/netty/NettyServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +64,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Cloud-storage" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/kora" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -110,6 +81,7 @@
       <recent name="com.geekbrains" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\java\cloud-storage-sep-2021\kora" />
       <recent name="C:\java\cloud-storage-sep-2021\client-sep-2021\src\main\resources" />
       <recent name="$PROJECT_DIR$/client-sep-2021/src/main/resources" />
       <recent name="$PROJECT_DIR$/server-sep-2021/src/main/resources" />

@@ -1,5 +1,6 @@
 package com.geekbrains;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.FileSystems;
@@ -10,17 +11,19 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.codehaus.plexus.util.FileUtils;
 
 
 @Slf4j
 public class Controller implements Initializable {
-    private Path currentDir = Paths.get(".").normalize().toAbsolutePath();
+    private Path currentDir = Paths.get("C:\\java\\cloud-storage-sep-2021\\client-sep-2021", "root");
 
     public ListView<String> fileClientView;
     public ListView<String> fileServerView;
@@ -37,6 +40,18 @@ public class Controller implements Initializable {
 
     private Net net;
 
+    private void addViewListener(ListView<String> lv, TextField ta) {
+        lv.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((ObservableValue<? extends String> ov, String old_val, String new_val) -> {
+                    try {
+                        ta.clear();
+                        ta.appendText(lv.getSelectionModel().getSelectedItem());
+                    } catch (NullPointerException ignored) {
+                    }
+                });
+    }
+
     public void sendLoginAndPassword(ActionEvent actionEvent) {
         String login = loginField.getText();
         String password = passwordField.getText();
@@ -47,9 +62,21 @@ public class Controller implements Initializable {
 
     public void sendFile(ActionEvent actionEvent) throws IOException {
         String fileName = input.getText();
+       //String fileName = input.getText().split(" ")[1];
         input.clear();
         Path file = currentDir.resolve(fileName);
         net.sendCommand(new FileMessage(file));
+        //net.sendCommand(new FileMessage(file.toFile()));
+    }
+
+
+    // удалить с клиента
+    public void deleteClient(ActionEvent actionEvent) throws IOException {
+        String fileName = input.getText();
+        //String fileName = fileClientView.getSelectionModel().getSelectedItem();
+        File file = new File(String.valueOf(currentDir.resolve(fileName)));
+        Delete.deleteFile(file);
+        refreshClientView();
     }
 
     public void receiveArrayFiles(ActionEvent actionEvent) {
@@ -68,6 +95,17 @@ public class Controller implements Initializable {
     }
 
 
+    //    Удалить с сервера
+    public void deleteServer(ActionEvent actionEvent) throws IOException {
+        String fileName = input.getText();
+        //String fileName = fileServerView.getSelectionModel().getSelectedItem();
+        //os.writeObject(new Delete(fileName));
+        input.clear();
+        Path file = Paths.get(fileName);
+        net.sendCommand(new Delete(fileName));
+    }
+
+
     public void clientPathUp(ActionEvent actionEvent) throws IOException {
         currentDir = currentDir.getParent();
         currentDirectoryOnClient.setText(currentDir.toString());
@@ -82,6 +120,7 @@ public class Controller implements Initializable {
     @SneakyThrows
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        addViewListener(fileClientView, input);
         disksBoxClient.getItems().clear(); //  очищаем вкладку disksBox при старте
         for (Path p : FileSystems.getDefault().getRootDirectories()) { // заполняем через стандартный метод
             // FileSystems который предоставляет инф-у о файловой системе мы берем систему по умолчанию (Default) и запрашиваем список корневых директорий
@@ -113,6 +152,11 @@ public class Controller implements Initializable {
                             currentDir.resolve(fileMessage.getName()),
                             fileMessage.getBytes()
                     );
+//                    Files.write(
+//                            currentDir.resolve(fileMessage.getName()),
+//                            fileMessage.getBytes()
+//                    );
+                   // FileUtils.copyFile(fileMessage.getFile(), new File(fileMessage.getName()));
                     Platform.runLater(() -> {
                         try {
                             refreshClientView();
@@ -192,56 +236,41 @@ public class Controller implements Initializable {
     }
 
 
-//Удалить с сервера
-//    public void deleteServer(ActionEvent actionEvent) throws IOException {
-//        String fileName = fileServerView.getSelectionModel().getSelectedItem();
-//        os.writeObject(new Delete(fileName));
-//        os.flush();
-//    }
-//// удалить с клиента
-//    public void deleteClient(ActionEvent actionEvent) throws IOException {
-//       String fileName = fileClientView.getSelectionModel().getSelectedItem();
-//        File file = new File(String.valueOf(currentDir.resolve(fileName)));
-//        Delete.deleteFile(file);
-//        refreshClientView();
-//    }
-
     // Выход по нажатию кнопки
     public void buttonExitAction(ActionEvent actionEvent) {
         Platform.exit();
     }
 
-    //Переход в папку по двойному щелчку
-    private void addNavigationListener() {
-        fileClientView.setOnMouseClicked(e -> {
-            if (e.getClickCount() == 2) {
-                String item = returnName2(fileClientView.getSelectionModel().getSelectedItem());
-                Path newPath = currentDir.resolve(item);
-                if (Files.isDirectory(newPath)) {
-                    currentDir = newPath;
-                    try {
-                        refreshClientView();
-                        currentDirectoryOnClient.setText(currentDir.toString());
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-               }else {
-                    input.setText(item);
-                }
-            }
-        });
-
-        fileServerView.setOnMouseClicked(e -> {
-            if (e.getClickCount() == 2) {
-                String item = returnName2(fileServerView.getSelectionModel().getSelectedItem());
-                if (returnName1(fileServerView.getSelectionModel().getSelectedItem()).equals("[Dir]")) {
-                    net.sendCommand(new PathInRequest(item));
-                } else {
-                    input.setText(item);
-                }
-            }
-        });
-    }
+//    //Переход в папку по двойному щелчку
+//    public void addNavigationListener() {
+//        fileClientView.setOnMouseClicked(e -> {
+//            if (e.getClickCount() == 2) {
+//                String item = returnName2(fileClientView.getSelectionModel().getSelectedItem());
+//                Path newPath = currentDir.resolve(item);
+//                if (Files.isDirectory(newPath)) {
+//                    currentDir = newPath;
+//                    try {
+//                        refreshClientView();
+//                        currentDirectoryOnClient.setText(currentDir.toString());
+//                    } catch (IOException ioException) {
+//                        ioException.printStackTrace();
+//                    }
+//                } else {
+//                    input.setText(item);
+//                }
+//            }
+//        });
+//        fileServerView.setOnMouseClicked(e -> {
+//            if (e.getClickCount() == 2) {
+//                String item = returnName2(fileServerView.getSelectionModel().getSelectedItem());
+//                if (returnName1(fileServerView.getSelectionModel().getSelectedItem()).equals("[Dir]")) {
+//                    net.sendCommand(new PathInRequest(item));
+//                } else {
+//                    input.setText(item);
+//                }
+//            }
+//        });
+//    }
 
     // выбор диска на клиенте
     public void diskSelection(ActionEvent actionEvent) throws IOException {// выбор диска на комбо боксе
@@ -254,6 +283,39 @@ public class Controller implements Initializable {
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
+    }
+
+
+
+
+        public void addNavigationListener() {
+        fileClientView.setOnMouseClicked(e -> {
+            if (e.getClickCount() == 2) {
+                String item = returnName2(fileClientView.getSelectionModel().getSelectedItem());
+                Path newPath = currentDir.resolve(item);
+                if (Files.isDirectory(newPath)) {
+                    currentDir = newPath;
+                    try {
+                        refreshClientView();
+                        currentDirectoryOnClient.setText(currentDir.toString());
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                } else {
+                    input.setText(item);
+                }
+            }
+        });
+        fileServerView.setOnMouseClicked(e -> {
+            if (e.getClickCount() == 2) {
+                String item = returnName2(fileServerView.getSelectionModel().getSelectedItem());
+                if (returnName1(fileServerView.getSelectionModel().getSelectedItem()).equals("[Dir]")) {
+                    net.sendCommand(new PathInRequest(item));
+                } else {
+                    input.setText(item);
+                }
+            }
+        });
     }
 
 

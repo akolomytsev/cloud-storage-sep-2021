@@ -47,11 +47,11 @@
                     <VBox.margin>
                         <Insets bottom="5.0" />
                     </VBox.margin></Button>
-                <Button maxWidth="Infinity" focusTraversable="false" text="&lt;&lt; Удалить у себя" onAction="#receiveArrayFiles">
+                <Button maxWidth="Infinity" focusTraversable="false" text="&lt;&lt; Удалить у себя" onAction="#deleteClient">
                     <VBox.margin>
                         <Insets bottom="5.0" />
                     </VBox.margin></Button>
-                <Button maxWidth="Infinity" focusTraversable="false" text="Удалить из облака &gt;&gt;" onAction="#receiveArrayFiles">
+                <Button maxWidth="Infinity" focusTraversable="false" text="Удалить из облака &gt;&gt;" onAction="#deleteServer">
                     <VBox.margin>
                         <Insets bottom="5.0" />
                     </VBox.margin></Button>
