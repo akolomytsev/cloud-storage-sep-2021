@@ -14,9 +14,14 @@ import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Date;
+
 
 @Slf4j
 public class NettyServer {
+
+    private int PORT = 8184;
+    private ChannelFuture channelFuture;
 
     public NettyServer() {
 
@@ -24,33 +29,30 @@ public class NettyServer {
         EventLoopGroup worker = new NioEventLoopGroup();
 
         try {
-            ServerBootstrap bootstrap = new ServerBootstrap();
-            ChannelFuture channelFuture = bootstrap.group(auth, worker)
+
+            ServerBootstrap serverBootstrap = new ServerBootstrap();
+            serverBootstrap.group(auth, worker)
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel channel) throws Exception {
                             channel.pipeline().addLast(
-                                    new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
                                     new ObjectEncoder(),
+                                    new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
                                     new FileMessageHandler()
+
                             );
                         }
-                    })
-                    .bind(8184)
-                    .sync();
-            log.debug("Server started...");
-            channelFuture.channel().closeFuture().sync(); // block
+                    });
+            channelFuture = serverBootstrap.bind(PORT).sync();
+            log.debug("Server started " + new Date());
+            channelFuture.channel().closeFuture().sync();
         }catch (Exception e) {
             log.error("Server exception: Stacktrace: ", e);
         } finally {
             auth.shutdownGracefully();
             worker.shutdownGracefully();
         }
-    }
-
-    public static void main(String[] args) {
-        new NettyServer();
     }
 
 }
