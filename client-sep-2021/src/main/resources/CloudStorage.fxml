@@ -20,34 +20,38 @@
 
             <VBox maxWidth="Infinity" HBox.hgrow="ALWAYS">
                 <HBox>
-                    <ComboBox fx:id="disksBoxClient"/>
-                    <TextField fx:id="clientPath" editable="false" HBox.hgrow="ALWAYS" />
+                    <ComboBox fx:id="disksBoxClient" onAction="#diskSelection"/>
+                    <TextField fx:id="currentDirectoryOnClient" editable="false" HBox.hgrow="ALWAYS" />
                     <Button text="Вверх" onAction="#clientPathUp" />
                 </HBox>
-                <ListView fx:id="clientFilesTableView" maxWidth="Infinity" VBox.vgrow="ALWAYS" />
+                <ListView fx:id="fileClientView" maxWidth="Infinity" VBox.vgrow="ALWAYS" />
                 <padding>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                 </padding>
             </VBox>
 
             <VBox maxWidth="Infinity" VBox.vgrow="ALWAYS">
-                <Button maxWidth="Infinity" focusTraversable="false" text="Копировать к себе &gt;&gt;" onAction="#upload">
+                <Button maxWidth="Infinity" focusTraversable="false" text="&lt;&lt; Копировать к себе" onAction="#receiveFile">
                     <VBox.margin>
                         <Insets bottom="5.0" />
                     </VBox.margin></Button>
-                <Button maxWidth="Infinity" focusTraversable="false" text="&lt;&lt;Копировать в облако " onAction="#download">
+                <Button maxWidth="Infinity" focusTraversable="false" text="Копировать в облако &gt;&gt;"  onAction="#sendFile">
                     <VBox.margin>
                         <Insets bottom="5.0" />
                     </VBox.margin></Button>
-                <Button maxWidth="Infinity" focusTraversable="false" text="Удалить">
+                <Button maxWidth="Infinity" focusTraversable="false" text="&lt;&lt;  Обновить лист у себя" onAction="#updateArrayFiles">
                     <VBox.margin>
                         <Insets bottom="5.0" />
                     </VBox.margin></Button>
-                <Button maxWidth="Infinity" focusTraversable="false" text="Создать директорию">
+                <Button maxWidth="Infinity" focusTraversable="false" text="Обновить лист на облаке &gt;&gt;" onAction="#receiveArrayFiles">
                     <VBox.margin>
                         <Insets bottom="5.0" />
                     </VBox.margin></Button>
-                <Button maxWidth="Infinity" focusTraversable="false" text="Создать файл">
+                <Button maxWidth="Infinity" focusTraversable="false" text="&lt;&lt; Удалить у себя" onAction="#receiveArrayFiles">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin></Button>
+                <Button maxWidth="Infinity" focusTraversable="false" text="Удалить из облака &gt;&gt;" onAction="#receiveArrayFiles">
                     <VBox.margin>
                         <Insets bottom="5.0" />
                     </VBox.margin></Button>
@@ -55,19 +59,26 @@
                     <Insets bottom="5.0" top="70.0" />
                 </padding>
             </VBox>
-
             <VBox maxWidth="Infinity" prefWidth="256.0" HBox.hgrow="ALWAYS">
                 <HBox>
-                    <TextField  fx:id="serverPath" editable="false" HBox.hgrow="ALWAYS" />
+                    <TextField fx:id="currentDirectoryOnServer" editable="false" HBox.hgrow="ALWAYS" />
                     <Button text="Вверх" onAction="#serverPathUp"/>
                 </HBox>
-                <ListView fx:id="serverFilesTableView" maxWidth="Infinity" VBox.vgrow="ALWAYS" />
+                <ListView fx:id="fileServerView" maxWidth="Infinity" VBox.vgrow="ALWAYS" />
                 <padding>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                 </padding>
             </VBox>
+            </HBox>
 
-        </HBox>
-        <TextField fx:id="clientPath1"  layoutX="14.0" layoutY="439.0" prefHeight="37.0" prefWidth="301.0"/>
+            <HBox>
+                <TextField fx:id="loginField"  layoutX="14.0"  prefHeight="37.0" promptText="LOGIN"/>
+                <TextField fx:id="passwordField"  layoutX="14.0"  prefHeight="37.0" promptText="PASSWORD"/>
+                <Button fx:id="Authorization" maxWidth="Infinity" focusTraversable="false" text="Enter" onAction="#sendLoginAndPassword"/>
+
+
+            </HBox>
+
+        <TextField fx:id="input"  layoutX="14.0" layoutY="439.0" prefHeight="37.0" prefWidth="301.0"/>
 
 </VBox>

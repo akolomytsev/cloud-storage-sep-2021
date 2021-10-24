@@ -1,17 +1,20 @@
 package com.geekbrains;
 
-public class FileRequest extends Command{
+import java.nio.file.Path;
 
+public class FileRequest extends Command{
     private final String name;
 
-    public FileRequest(String name) {
-        this.name = name;
+    public FileRequest(Path path) {
+        name = path.getFileName().toString();
     }
 
-    public String getName(){return name;}
+    public String getName() {
+        return name;
+    }
 
     @Override
-    public CommandType getType(){
+    public CommandType getType() {
         return CommandType.FILE_REQUEST;
     }
 }

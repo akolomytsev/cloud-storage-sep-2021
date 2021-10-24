@@ -1,6 +1,8 @@
 package com.geekbrains;
 
 public enum CommandType {
+    AUTH_REQUEST,  //
+    AUTH_RESPONSE, //
     FILE_MESSAGE, // послать файл upload
     FILE_REQUEST, // дай мне файл download
     LIST_REQUEST, // дай мне список который у тебя есть
@@ -8,4 +10,5 @@ public enum CommandType {
     PATH_IN_REQUEST, //
     PATH_UP_REQUEST, //
     PATH_RESPONSE, // в какой директории сейчас сервер
+    DELETE
 }

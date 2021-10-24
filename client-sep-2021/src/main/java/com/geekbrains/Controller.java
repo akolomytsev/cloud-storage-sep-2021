@@ -1,167 +1,259 @@
 package com.geekbrains;
 
-
 import java.io.IOException;
-import java.net.Socket;
 import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-
-import io.netty.handler.codec.serialization.ObjectDecoderInputStream;
-import io.netty.handler.codec.serialization.ObjectEncoderOutputStream;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
 public class Controller implements Initializable {
+    private Path currentDir = Paths.get(".").normalize().toAbsolutePath();
 
-    public ListView<String> clientFilesTableView;
-    public ListView<String> serverFilesTableView;
-    public TextField clientPath;
-    public TextField serverPath;
-    private Path currentDir;
-    private ObjectDecoderInputStream is;
-    private ObjectEncoderOutputStream os;
+    public ListView<String> fileClientView;
+    public ListView<String> fileServerView;
+    public TextField input;
+    public TextField currentDirectoryOnClient;
+    public TextField currentDirectoryOnServer;
 
+    public AnchorPane mainScene;
+    public ComboBox disksBoxClient;
 
+    public TextField loginField;
+    public TextField passwordField;
+    public Button Authorization;
 
+    private Net net;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        try {
-            currentDir = Paths.get("client-sep-2021", "root").normalize().toAbsolutePath();
-            Socket socket = new Socket("localhost", 8189);
-            os = new ObjectEncoderOutputStream(socket.getOutputStream());
-            is = new ObjectDecoderInputStream(socket.getInputStream());
-
-            refreshClientView();
-            addNavigationListeners();
-            Thread daemon = new Thread(() -> {
-                try {
-                    while (true) {
-                        Command msg = (Command) is.readObject();
-                         switch (msg.getType()) {
-                            case LIST_RESPONSE:
-                                ListResponse response = (ListResponse) msg;
-                                List<String> names = response.getNames();
-                                refreshServerView(names); // обновляем серверный лист
-                                break;
-                            case PATH_RESPONSE:
-                                PathResponse pathResponse = (PathResponse) msg;
-                                String path = pathResponse.getPath();
-                                Platform.runLater(() -> serverPath.setText(path));
-                                break;
-                            case FILE_MESSAGE:
-                                FileMessage message = (FileMessage) msg;
-                                Files.write(currentDir.resolve(message.getName()), message.getBytes()); // на клиенте пишем новый файл
-                                refreshClientView(); // и обновляем лист
-                                break;
-                        }
-                    }
-                } catch (Exception e) {
-                    log.error("exception while read from input stream");
-                }
-            });
-            daemon.setDaemon(true);
-            daemon.start();
-        } catch (IOException ioException) {
-            log.error("e=", ioException);
-        }
+    public void sendLoginAndPassword(ActionEvent actionEvent) {
+        String login = loginField.getText();
+        String password = passwordField.getText();
+        loginField.clear();
+        passwordField.clear();
+        net.sendCommand(new AuthRequest(login, password));
     }
 
-    private void refreshClientView() throws IOException {
-        clientPath.setText(currentDir.normalize().toAbsolutePath().toString());
-        List<String> names = Files.list(currentDir)
-                .map(p -> p.getFileName().toString())
-                .collect(Collectors.toList());
-        Platform.runLater(() -> {
-            clientFilesTableView.getItems().clear();
-            clientFilesTableView.getItems().addAll(names);
-        });
-
+    public void sendFile(ActionEvent actionEvent) throws IOException {
+        String fileName = input.getText();
+        input.clear();
+        Path file = currentDir.resolve(fileName);
+        net.sendCommand(new FileMessage(file));
     }
 
-    private void refreshServerView(List<String> names) {
-        Platform.runLater(() -> {
-            serverFilesTableView.getItems().clear();
-            serverFilesTableView.getItems().addAll(names);
-        });
+    public void receiveArrayFiles(ActionEvent actionEvent) {
+        net.sendCommand(new ListRequest());
     }
 
-    public void upload(ActionEvent actionEvent) throws IOException {
-        String fileName = clientFilesTableView.getSelectionModel().getSelectedItem();
-        FileMessage message = new FileMessage(currentDir.resolve(fileName));
-        os.writeObject(message);
-        os.flush();
-    }
-
-    public void download(ActionEvent actionEvent) throws IOException {
-        String fileName = serverFilesTableView.getSelectionModel().getSelectedItem();
-        os.writeObject(new FileRequest(fileName));
-        os.flush();
-    }
-
-    public void clientPathUp(ActionEvent actionEvent) throws IOException {
-        if (currentDir.getParent() != null) {
-            currentDir = currentDir.getParent();
-            clientPath.setText(currentDir.toString());
-        }
+    public void updateArrayFiles(ActionEvent actionEvent) throws IOException {
         refreshClientView();
     }
 
-    public void serverPathUp(ActionEvent actionEvent) throws IOException {
-        os.writeObject(new PathUpRequest());
-        os.flush();
+    public void receiveFile(ActionEvent actionEvent) {
+        String fileName = input.getText();
+        input.clear();
+        Path file = Paths.get(fileName);
+        net.sendCommand(new FileRequest(file));
     }
 
+
+    public void clientPathUp(ActionEvent actionEvent) throws IOException {
+        currentDir = currentDir.getParent();
+        currentDirectoryOnClient.setText(currentDir.toString());
+        refreshClientView();
+    }
+
+    public void serverPathUp(ActionEvent actionEvent) {
+        net.sendCommand(new PathUpRequest());
+    }
+
+
+    @SneakyThrows
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        disksBoxClient.getItems().clear(); //  очищаем вкладку disksBox при старте
+        for (Path p : FileSystems.getDefault().getRootDirectories()) { // заполняем через стандартный метод
+            // FileSystems который предоставляет инф-у о файловой системе мы берем систему по умолчанию (Default) и запрашиваем список корневых директорий
+            disksBoxClient.getItems().add(p.toString()); // и добавляем в выпадающий список все диски
+        }
+        disksBoxClient.getSelectionModel().select(0); // выбираем по умолчанию первый из них
+        try {
+            //currentDir = Paths.get("client-sep-2021", "root").normalize().toAbsolutePath();
+            currentDirectoryOnClient.setText(currentDir.toString());
+            refreshClientView();
+            addNavigationListener();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        net = Net.getInstance(cmd -> {
+
+            switch (cmd.getType()) {
+                case LIST_RESPONSE:
+                    ListResponse listResponse = (ListResponse) cmd;
+                    Platform.runLater(() -> refreshServerView(listResponse.getList())); // обновляем серверный лист
+                    break;
+                case PATH_RESPONSE:
+                    PathResponse pathResponse = (PathResponse) cmd;
+                    currentDirectoryOnServer.setText(pathResponse.getPath());
+                    break;
+                case FILE_MESSAGE:
+                    FileMessage fileMessage = (FileMessage) cmd;
+                    Files.write(
+                            currentDir.resolve(fileMessage.getName()),
+                            fileMessage.getBytes()
+                    );
+                    Platform.runLater(() -> {
+                        try {
+                            refreshClientView();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+
+                    break;
+                case AUTH_RESPONSE:
+                    AuthResponse authResponse = (AuthResponse) cmd;
+                    log.debug("AuthResponse {}", authResponse.getAuthStatus());
+                    if (authResponse.getAuthStatus()) {
+                        //mainScene.setVisible(true);
+                        loginField.setVisible(false);
+                        passwordField.setVisible(false);
+                        Authorization.setVisible(false);
+                        net.sendCommand(new ListRequest());
+                    } else if (!authResponse.getAuthStatus()) {
+                        Platform.runLater(() -> {
+                            Alert alert = new Alert(Alert.AlertType.WARNING, "Неверный логин или пароль",
+                                    ButtonType.OK);
+                            alert.showAndWait();
+                        });
+                    }
+            }
+
+        });
+
+    }
+
+    public String resolveFileType(Path path) {
+        if (Files.isDirectory(path)) {
+            return "[Dir]" + " " + path.getFileName().toString();
+        } else {
+            return "[File]" + " " + path.getFileName().toString();
+        }
+    }
+
+    public String returnName2(String str) {
+        String[] words = str.split(" ");
+        String returnWay;
+        switch (words.length) {
+            case 2:
+                returnWay = words[1];
+                break;
+            case 3:
+                returnWay = words[1] + " " + words[2];
+                break;
+            case 4:
+                returnWay = words[1] + " " + words[2] + " " + words[3];
+                break;
+            default:
+                returnWay = words[1];
+                break;
+        }
+        return returnWay;
+    }
+
+    public String returnName1(String str) {
+        String[] words = str.split(" ");
+        return words[0];
+    }
+
+    private void refreshClientView() throws IOException {
+        fileClientView.getItems().clear();
+        List<String> names = Files.list(currentDir)
+                .map(this::resolveFileType)
+                .collect(Collectors.toList());
+        fileClientView.getItems().addAll(names);
+    }
+
+
+    private void refreshServerView(List<String> names) {
+        fileServerView.getItems().clear();
+        fileServerView.getItems().addAll(names);
+    }
+
+
+//Удалить с сервера
+//    public void deleteServer(ActionEvent actionEvent) throws IOException {
+//        String fileName = fileServerView.getSelectionModel().getSelectedItem();
+//        os.writeObject(new Delete(fileName));
+//        os.flush();
+//    }
+//// удалить с клиента
+//    public void deleteClient(ActionEvent actionEvent) throws IOException {
+//       String fileName = fileClientView.getSelectionModel().getSelectedItem();
+//        File file = new File(String.valueOf(currentDir.resolve(fileName)));
+//        Delete.deleteFile(file);
+//        refreshClientView();
+//    }
+
+    // Выход по нажатию кнопки
     public void buttonExitAction(ActionEvent actionEvent) {
         Platform.exit();
     }
 
-
-    private void addNavigationListeners(){
-        clientFilesTableView.setOnMouseClicked(e -> {
-            if (e.getClickCount() ==2) {
-                String item = clientFilesTableView.getSelectionModel().getSelectedItem();
+    //Переход в папку по двойному щелчку
+    private void addNavigationListener() {
+        fileClientView.setOnMouseClicked(e -> {
+            if (e.getClickCount() == 2) {
+                String item = returnName2(fileClientView.getSelectionModel().getSelectedItem());
                 Path newPath = currentDir.resolve(item);
-                if (Files.isDirectory(newPath)){
+                if (Files.isDirectory(newPath)) {
                     currentDir = newPath;
                     try {
                         refreshClientView();
-                    }catch (IOException ioException){
+                        currentDirectoryOnClient.setText(currentDir.toString());
+                    } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
+               }else {
+                    input.setText(item);
                 }
             }
         });
 
-        serverFilesTableView.setOnMouseClicked(e -> {
+        fileServerView.setOnMouseClicked(e -> {
             if (e.getClickCount() == 2) {
-                String item = serverFilesTableView.getSelectionModel().getSelectedItem();
-                try {
-                    os.writeObject(new PathInRequest(item));
-                    os.flush();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
+                String item = returnName2(fileServerView.getSelectionModel().getSelectedItem());
+                if (returnName1(fileServerView.getSelectionModel().getSelectedItem()).equals("[Dir]")) {
+                    net.sendCommand(new PathInRequest(item));
+                } else {
+                    input.setText(item);
                 }
             }
         });
+    }
+
+    // выбор диска на клиенте
+    public void diskSelection(ActionEvent actionEvent) throws IOException {// выбор диска на комбо боксе
+        ComboBox<String> element = (ComboBox<String>) actionEvent.getSource(); // через действие (actionEvent) получаем информацию на какой диск нажал пользователь
+        Path newPath = Paths.get(element.getSelectionModel().getSelectedItem());
+        currentDir = newPath;
+        refreshClientView();
+        try {
+            refreshClientView();// и проверяем а что там выбрали
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 
 
