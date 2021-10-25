@@ -46,8 +46,9 @@ public class Net {
                             protected void initChannel(SocketChannel c) throws Exception {
                                 channel = c;
                                 channel.pipeline().addLast(
-                                        new ObjectEncoder(),
                                         new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
+                                        new ObjectEncoder(),
+
                                         new ClientStringHandler(callback)
                                 );
                             }

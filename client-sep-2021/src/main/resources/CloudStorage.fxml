@@ -6,7 +6,7 @@
 
 <?import javafx.geometry.Insets?>
 
-<VBox prefHeight="500.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8"
+<VBox prefHeight="500.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.geekbrains.Controller">
             <MenuBar focusTraversable="false" maxWidth="Infinity" >
             <Menu text="File">
@@ -24,7 +24,7 @@
                     <TextField fx:id="currentDirectoryOnClient" editable="false" HBox.hgrow="ALWAYS" />
                     <Button text="Вверх" onAction="#clientPathUp" />
                 </HBox>
-                <ListView fx:id="fileClientView" maxWidth="Infinity" VBox.vgrow="ALWAYS" />
+                <TableView fx:id="fileClientView" maxWidth="Infinity" VBox.vgrow="ALWAYS" />
                 <padding>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                 </padding>
@@ -64,7 +64,7 @@
                     <TextField fx:id="currentDirectoryOnServer" editable="false" HBox.hgrow="ALWAYS" />
                     <Button text="Вверх" onAction="#serverPathUp"/>
                 </HBox>
-                <ListView fx:id="fileServerView" maxWidth="Infinity" VBox.vgrow="ALWAYS" />
+                <TableView fx:id="fileServerView" maxWidth="Infinity" VBox.vgrow="ALWAYS" />
                 <padding>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                 </padding>

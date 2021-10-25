@@ -60,6 +60,7 @@ public class FileMessageHandler extends SimpleChannelInboundHandler<Command> {
                 break;
 
             case LIST_REQUEST:
+
                 ctx.writeAndFlush(new PathResponse(currentPath.toString()));
                 ctx.writeAndFlush(new ListResponse(currentPath));
                 log.debug("Send list of files to the client");

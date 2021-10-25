@@ -1,11 +1,13 @@
 package com.geekbrains;
 
+import lombok.Getter;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-
+@Getter
 public class FileInfo {
 
         public enum FileType { // конструкция которая указывает имя файла или директории,
